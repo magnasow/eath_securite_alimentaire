@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b6ee6a22-4da8-4b27-8505-7aec3b4eef61" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/AdministrateurService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/IIngredientsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/IPersonneService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/IProduitsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/IUtilisateursService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/Implement/AdministrateurServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/Implement/CustomUserDetailsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/Implement/IngredientsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/Implement/PasswordResetServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/Implement/PersonneServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/Implement/ProdIngredientsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/Implement/ProduitsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/Implement/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/Implement/UtilisateursServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/PasswordResetService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/ProdIngredientsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/Service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/config/ObjectPostProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/dao/AdministrateurRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/dao/IngredientsRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/dao/PasswordResetTokenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/dao/PersonneRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/dao/ProdIngredientsRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/dao/ProduitsRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/dao/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/dao/UtilisateursRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Administrateur.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Allergenes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Commentaires.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Conformite_Halal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Historique_Scan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Ingredients.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Ingredients_Allergenes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Ingredients_Substances_Nocives.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Nutritions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/PasswordResetToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Personne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Produits.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Produits_Ingredients.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Resultat_Analyse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Substances_Nocives.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Types_Produits.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/entite/Utilisateurs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/web/AdministrateurController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/web/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/web/IngredientsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/web/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/web/PersonneController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/web/ProdIngredientsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/web/ProduitsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/eath/web/UtilisateursController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package-info" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2k3XdlNIVdgyIytcxKgT7BJZnAJ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.eath.config" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="backend [spring-boot:run]" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="spring-boot:run" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b6ee6a22-4da8-4b27-8505-7aec3b4eef61" name="Changes" comment="" />
+      <created>1722513327136</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1722513327136</updated>
+    </task>
+    <servers />
+  </component>
+</project>
