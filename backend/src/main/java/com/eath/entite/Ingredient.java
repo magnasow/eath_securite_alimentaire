@@ -22,11 +22,23 @@ public class Ingredient {
     @Column(name = "description_ingredient", columnDefinition = "TEXT")
     private String descriptionIngredient;
 
-    @Column(name = "date_creation", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "date_creation", nullable = false, updatable = false)
     private LocalDateTime dateCreation;
 
-    @Column(name = "date_modification", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    @Column(name = "date_modification", nullable = false)
     private LocalDateTime dateModification;
+
+    @PrePersist
+    protected void onCreate() {
+        LocalDateTime now = LocalDateTime.now();
+        this.dateCreation = now;
+        this.dateModification = now;
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.dateModification = LocalDateTime.now();
+    }
 
     // Getters and setters
     public Integer getIdIngredient() { return idIngredient; }
