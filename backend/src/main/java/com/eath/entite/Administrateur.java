@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 import java.time.Instant;
 
-@Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class Administrateur {
 
     @Id
@@ -20,7 +20,7 @@ public class Administrateur {
     @Column(name = "id_administrateur")
     private Integer idAdministrateur;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_personne", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Personne personne;
@@ -40,10 +40,12 @@ public class Administrateur {
     @PrePersist
     protected void onCreate() {
         dateCreation = Timestamp.from(Instant.now());
+        System.out.println("Creating entity: " + this);
     }
 
     @PreUpdate
     protected void onUpdate() {
         dateModification = Timestamp.from(Instant.now());
+        System.out.println("Updating entity: " + this);
     }
 }
