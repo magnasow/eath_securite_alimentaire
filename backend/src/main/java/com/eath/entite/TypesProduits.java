@@ -34,11 +34,15 @@ public class TypesProduits {
 
     @PrePersist
     protected void onCreate() {
-        dateCreation = Timestamp.from(Instant.now());
+        Timestamp now = Timestamp.from(Instant.now());
+        this.dateCreation = now;
+        this.dateModification = now; // Optionnel si vous voulez initialiser aussi dateModification lors de la création
+        System.out.println("PrePersist: dateCreation set to " + this.dateCreation);
     }
 
     @PreUpdate
     protected void onUpdate() {
-        dateModification = Timestamp.from(Instant.now());
+        this.dateModification = Timestamp.from(Instant.now());
+        System.out.println("PreUpdate: dateModification set to " + this.dateModification);
     }
 }
