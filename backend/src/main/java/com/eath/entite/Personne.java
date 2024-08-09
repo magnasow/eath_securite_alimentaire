@@ -23,13 +23,24 @@ public class Personne implements Serializable {
     private String motDePasse;
     private String email;
     private String photoDeProfil;
+
+    @Column(name = "date_creation", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp dateCreation;
-    private Double taille; // Utilisation de Double pour les valeurs décimales
-    private Double poids;  // Utilisation de Double pour les valeurs décimales
+
+    private Double taille;
+    private Double poids;
     private Integer age;
     private String sexe;
 
     @Lob
     private String conditionsMedicales;
 
+    @OneToOne(mappedBy = "personne", orphanRemoval = true)
+    private Administrateur administrateur;
+    @OneToOne(mappedBy = "personne",  orphanRemoval = true)
+    private Utilisateurs utilisateurs;
+    @PrePersist
+    protected void onCreate() {
+        dateCreation = new Timestamp(System.currentTimeMillis());
+    }
 }
