@@ -13,6 +13,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "administrateurs") // Assurez-vous que le nom de la table est correct
 public class Administrateur {
 
     @Id
@@ -40,12 +41,13 @@ public class Administrateur {
     @PrePersist
     protected void onCreate() {
         dateCreation = Timestamp.from(Instant.now());
-        System.out.println("Creating entity: " + this);
+        dateModification = Timestamp.from(Instant.now()); // Initialiser également dateModification si souhaité
+        System.out.println("PrePersist: dateCreation set to " + dateCreation + ", dateModification set to " + dateModification);
     }
 
     @PreUpdate
     protected void onUpdate() {
         dateModification = Timestamp.from(Instant.now());
-        System.out.println("Updating entity: " + this);
+        System.out.println("PreUpdate: dateModification set to " + dateModification);
     }
 }
