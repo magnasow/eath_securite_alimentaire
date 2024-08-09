@@ -1,5 +1,6 @@
 package com.eath.entite;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
@@ -7,7 +8,10 @@ import java.util.Objects;
 @Embeddable
 public class ProduitIngredientKey implements Serializable {
 
+    @Column(name = "id_produit")
     private Integer idProduit;
+
+    @Column(name = "id_ingredient")
     private Integer idIngredient;
 
     // Default constructor
