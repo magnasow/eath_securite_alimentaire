@@ -3,7 +3,8 @@ package com.eath.web;
 import com.eath.dao.AdministrateurRepository;
 import com.eath.entite.Administrateur;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +17,7 @@ import java.util.Optional;
 @RequestMapping("/api/administrateurs")
 public class AdministrateurController {
 
-    @Autowired
-    private AdministrateurRepository administrateurRepository;
+    private final AdministrateurRepository administrateurRepository;
 
     @GetMapping
     public List<Administrateur> getAllAdministrateurs() {
@@ -31,8 +31,9 @@ public class AdministrateurController {
     }
 
     @PostMapping
-    public Administrateur createAdministrateur(@RequestBody Administrateur administrateur) {
-        return administrateurRepository.save(administrateur);
+    public ResponseEntity<Administrateur> createAdministrateur(@RequestBody Administrateur administrateur) {
+        Administrateur savedAdministrateur = administrateurRepository.save(administrateur);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedAdministrateur);
     }
 
     @PutMapping("/{id}")
@@ -49,13 +50,16 @@ public class AdministrateurController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAdministrateur(@PathVariable Integer id) {
-        if (administrateurRepository.existsById(id)) {
-            administrateurRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<String> deleteAdministrateur(@PathVariable Integer id) {
+        try {
+            if (administrateurRepository.existsById(id)) {
+                administrateurRepository.deleteById(id);
+                return ResponseEntity.noContent().build();
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (DataIntegrityViolationException ex) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Erreur de contrainte d'intégrité.");
         }
     }
 }
-
