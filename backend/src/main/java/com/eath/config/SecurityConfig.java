@@ -1,14 +1,13 @@
 package com.eath.config;
 
 import com.eath.Service.UtilisateurAdministrateurVueService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -46,15 +45,19 @@ public class SecurityConfig {
                                 .requestMatchers("/api/substances-nocives/**").permitAll()
                                 .requestMatchers("/api/informations-nutritionnelles/**").permitAll()
                                 .requestMatchers("/api/commentaires/**").permitAll()
-                                .requestMatchers("/webhook/**").permitAll()
-                                .requestMatchers("/audio/**").permitAll()
-                                .requestMatchers("/text-to-speech/**").permitAll() // Ajout de la route pour le service de synthèse vocale
                                 .requestMatchers("/api/resultats-analyse/**").permitAll()
-                                .requestMatchers("/api/test/**").permitAll()
+                                .requestMatchers("/api/v1/voice/process").permitAll()
+                                .requestMatchers("/text-to-speech/**").permitAll() // Ajout de la route pour le service de synthèse vocale
+                                .requestMatchers("/audio/**").permitAll()
+                                .requestMatchers("/webhook/**").permitAll()
 
                                 .anyRequest().authenticated() // Requiert une authentification pour toutes les autres requêtes
                 )
-                .httpBasic(); // Utilisation de l'authentification HTTP Basic
+                .exceptionHandling()
+                .authenticationEntryPoint((request, response, authException) -> {
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+                }); // Configuration de l'EntryPoint personnalisé
+
         return http.build();
     }
 
@@ -62,10 +65,5 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return email -> utilisateurService.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé avec l'email : " + email));
-    }
+    
 }
