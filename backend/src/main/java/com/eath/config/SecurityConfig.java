@@ -46,7 +46,6 @@ public class SecurityConfig {
                                 .requestMatchers("/api/substances-nocives/**").permitAll()
                                 .requestMatchers("/api/informations-nutritionnelles/**").permitAll()
                                 .requestMatchers("/api/commentaires/**").permitAll()
-                                .requestMatchers("/api/users/**").permitAll()
                                 .requestMatchers("/webhook/**").permitAll()
                                 .requestMatchers("/audio/**").permitAll()
                                 .requestMatchers("/text-to-speech/**").permitAll() // Ajout de la route pour le service de synthèse vocale
