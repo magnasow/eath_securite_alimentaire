@@ -50,6 +50,7 @@ public class SecurityConfig {
                                 .requestMatchers("/text-to-speech/**").permitAll() // Ajout de la route pour le service de synthèse vocale
                                 .requestMatchers("/audio/**").permitAll()
                                 .requestMatchers("/webhook/**").permitAll()
+                                .requestMatchers("/api/password-reset/**").permitAll()
 
                                 .anyRequest().authenticated() // Requiert une authentification pour toutes les autres requêtes
                 )
