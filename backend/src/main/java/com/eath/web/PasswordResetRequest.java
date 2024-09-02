@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class PasswordResetRequest {
-    private String email; // pour initier la réinitialisation
-    private String newPassword; // pour réinitialiser le mot de passe
+    private String email; // Pour initier la réinitialisation
+    private String token; // Pour réinitialiser le mot de passe
+    private String newPassword; // Pour réinitialiser le mot de passe
 }
