@@ -2,8 +2,7 @@ package com.eath.entite;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -15,24 +14,24 @@ public class PasswordResetToken {
 
     private String token;
 
-    private String verificationCode;
-
     @ManyToOne
     @JoinColumn(name = "utilisateur_id")
     private Utilisateurs utilisateur;
 
-    private Timestamp expiryDate;
+    private LocalDateTime expiryDate;
 
-    // Constructeurs, getters, et setters
-
+    // Constructeur par défaut
     public PasswordResetToken() {}
 
-    public PasswordResetToken(String token, String verificationCode, Utilisateurs utilisateur) {
+    // Constructeur avec les paramètres token et utilisateur
+    public PasswordResetToken(String token, Utilisateurs utilisateur) {
         this.token = token;
-        this.verificationCode = verificationCode;
         this.utilisateur = utilisateur;
-        this.expiryDate = new Timestamp(System.currentTimeMillis() + 3600000); // 1 heure
+        this.expiryDate = LocalDateTime.now().plusHours(1); // Expiration dans 1 heure
     }
 
-    // Getters et Setters
+    // Méthode pour vérifier si le token est expiré
+    public boolean isExpired() {
+        return LocalDateTime.now().isAfter(this.expiryDate);
+    }
 }
