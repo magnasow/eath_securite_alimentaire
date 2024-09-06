@@ -1,8 +1,6 @@
 package com.eath.Service;
 
 public interface PasswordResetService {
-
-    void initiatePasswordReset(String email);
-
-    void resetPassword(String token, String newPassword);
+    boolean initiatePasswordReset(String email);
+    boolean resetPassword(String token, String newPassword);
 }
