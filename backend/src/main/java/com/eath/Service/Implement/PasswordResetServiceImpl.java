@@ -1,21 +1,23 @@
 package com.eath.Service.Implement;
 
-import com.eath.Service.EmailService;
 import com.eath.Service.PasswordResetService;
+import com.eath.Service.EmailService;
 import com.eath.dao.PasswordResetTokenRepository;
+import com.eath.dao.UtilisateursRepository;
 import com.eath.entite.PasswordResetToken;
 import com.eath.entite.Utilisateurs;
-import com.eath.exception.UtilisateurNotFoundException;
-import com.eath.dao.UtilisateursRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class PasswordResetServiceImpl implements PasswordResetService {
+
+    @Autowired
+    private PasswordResetTokenRepository passwordResetTokenRepository;
 
     @Autowired
     private UtilisateursRepository utilisateursRepository;
@@ -26,48 +28,60 @@ public class PasswordResetServiceImpl implements PasswordResetService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private PasswordResetTokenRepository tokenRepository;
+    private static final Random RANDOM = new Random();
 
     @Override
-    public void initiatePasswordReset(String email) {
-        // Rechercher l'utilisateur par e-mail
-        Utilisateurs user = utilisateursRepository.findByEmail(email)
-                .orElseThrow(() -> new UtilisateurNotFoundException("Utilisateur non trouvé"));
+    public boolean initiatePasswordReset(String email) {
+        Optional<Utilisateurs> optionalUtilisateur = utilisateursRepository.findByEmail(email);
 
-        // Générer un token unique
-        String token = UUID.randomUUID().toString();
+        if (optionalUtilisateur.isPresent()) {
+            Utilisateurs utilisateur = optionalUtilisateur.get();
+            String token = generateResetCode(); // Utilisation du code à 3 chiffres
 
-        // Créer un nouvel objet PasswordResetToken
-        PasswordResetToken resetToken = new PasswordResetToken(token, user);
+            // Créer un nouveau token
+            PasswordResetToken passwordResetToken = new PasswordResetToken(token, utilisateur);
+            passwordResetTokenRepository.save(passwordResetToken);
 
-        // Définir la date d'expiration du token (par exemple, 1 heure à partir de maintenant)
-        resetToken.setExpiryDate(LocalDateTime.now().plusHours(1));
-
-        // Enregistrer le token dans la base de données
-        tokenRepository.save(resetToken);
-
-        // Envoyer le lien de réinitialisation par e-mail
-        emailService.sendPasswordResetEmail(user.getEmail(), token);
-    }
-
-    @Override
-    public void resetPassword(String token, String newPassword) {
-        // Trouver le token dans la base de données
-        PasswordResetToken resetToken = tokenRepository.findByToken(token)
-                .orElseThrow(() -> new RuntimeException("Token invalide"));
-
-        // Vérifier si le token a expiré
-        if (resetToken.getExpiryDate().isBefore(LocalDateTime.now())) {
-            throw new RuntimeException("Token expiré");
+            // Envoyer l'e-mail avec le token
+            emailService.sendPasswordResetEmail(utilisateur.getEmail(), token);
+            return true;
+        } else {
+            return false; // Utilisateur non trouvé
         }
-
-        // Réinitialiser le mot de passe
-        Utilisateurs user = resetToken.getUtilisateur();
-        user.setMotDePasse(passwordEncoder.encode(newPassword));
-        utilisateursRepository.save(user);
-
-        // Supprimer le token après utilisation
-        tokenRepository.delete(resetToken);
     }
+
+    @Override
+    public boolean resetPassword(String token, String newPassword) {
+        Optional<PasswordResetToken> optionalToken = passwordResetTokenRepository.findByToken(token);
+
+        // Vérifier si le jeton existe
+        if (optionalToken.isPresent()) {
+            PasswordResetToken passwordResetToken = optionalToken.get();
+
+            // Vérifier si le jeton est expiré
+            if (passwordResetToken.isExpired()) {
+                return false; // Le jeton est expiré
+            }
+
+            // Récupérer l'utilisateur associé
+            Utilisateurs utilisateur = passwordResetToken.getUtilisateur();
+
+            // Réinitialiser le mot de passe
+            utilisateur.setMotDePasse(passwordEncoder.encode(newPassword));
+            utilisateursRepository.save(utilisateur); // Sauvegarder le nouveau mot de passe
+
+            // Supprimer le jeton après réinitialisation
+            passwordResetTokenRepository.delete(passwordResetToken);
+
+            return true; // Réinitialisation réussie
+        } else {
+            return false; // Jeton invalide
+        }
+    }
+
+    private String generateResetCode() {
+        int code = RANDOM.nextInt(900) + 100; // Génère un nombre entre 100 et 999
+        return String.valueOf(code);
+    }
+
 }
